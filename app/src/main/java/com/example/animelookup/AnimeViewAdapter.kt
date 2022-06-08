@@ -1,9 +1,11 @@
 package com.example.animelookup;
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.net.toUri
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.animelookup.databinding.ActivityMainBinding
 import com.example.animelookup.databinding.ItemLayoutBinding
@@ -20,6 +22,11 @@ internal class AnimeViewAdapter(val animeList: List<Anime>) : RecyclerView.Adapt
         holder.itemBinding.animeTitle.text = animeList.get(position).title
         val imageAddress = animeList.get(position).image.substring(28)
         Picasso.get().load(imageAddress.toUri()).into(holder.itemBinding.animeImage)
+        holder.itemBinding.animeTitle.setOnClickListener{
+            val animeAddress = animeList.get(position).address
+            val action = HomeScreenDirections.actionHomeScreenToInfoScreen(animeAddress)
+            Navigation.findNavController(holder.itemBinding.root).navigate(action)
+        }
     }
 
     override fun getItemCount(): Int {
