@@ -28,12 +28,13 @@ class InfoScreen : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = LayoutInfoTopPortionBinding.inflate(inflater, container, false)
+        val binding = FragmentInfoScreenBinding.inflate(inflater, container, false)
         viewModel.setup(binding.root.context)
         viewModel.infoFragSetup(args.animeName!!).observe(viewLifecycleOwner, Observer {
-            Log.d("Test", "onCreateView: ${it}")
-            Picasso.get().load(it.image.toUri()).into(binding.animeProfile)
-            binding.animeName.text = it.title
+            Picasso.get().load(it.image.toUri()).into(binding.topPortion.animeProfile)
+            binding.topPortion.animeName.text = it.title
+            binding.animeInfo.text = it.description
+            binding.topPortion.animeRating.text = it.rating
         })
         return binding.root
     }
