@@ -3,8 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".InfoScreen">
+    tools:context=".InfoScreen"
+    android:orientation="vertical">
 
-    <include layout="@layout/layout_info_top_portion"/>
+    <include
+        android:id="@+id/top_portion"
+        layout="@layout/layout_info_top_portion"/>
+
+    <TextView
+        android:id="@+id/anime_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ANIME INFO"
+        android:textSize="14sp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"/>
 
 </LinearLayout>

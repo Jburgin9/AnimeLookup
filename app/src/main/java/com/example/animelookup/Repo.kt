@@ -28,11 +28,17 @@ class Repo {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val doc = Jsoup.connect(address).get()
-                val image = doc.select(".pure-1.md-2-3").select("img").eq(0).attr("src")
-                val name = doc.select(".pure-1.md-2-3").select("img").eq(0).attr("alt")
-                val rating = doc.select(".pure-1.md-1-5").eq(3).select(".avgRating").attr("title")
-                Log.d("Test", "getWebpage: $rating")
-                val anime = Anime(image = image, title = name, address = address, rating = rating)
+                val image = doc.select(".pure-1.md-2-3").select("img")
+                    .eq(0).attr("src")
+                val name = doc.select(".pure-1.md-2-3").select("img")
+                    .eq(0).attr("alt")
+                val rating = doc.select(".pure-1.md-1-5")
+                    .eq(3).select(".avgRating").attr("title")
+                val _description = doc.select(".pure-1.md-3-5")
+                    .select("p").eq(0).toString()
+                val description = _description.subSequence(3, _description.length - 10)
+                val anime = Anime(image = image, title = name, address = address, rating = rating,
+                    description = description.toString())
                 profilePic.postValue(anime)
             } catch (e: IOException){
                 e.printStackTrace()
