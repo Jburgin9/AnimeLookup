@@ -6,4 +6,5 @@ data class Anime(
     val image: String,
     val address: String,
     val rating: String,
-    val description: String)
+    val description: String,
+    var watched: Boolean)

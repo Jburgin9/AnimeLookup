@@ -14,6 +14,13 @@ class Repo {
     companion object {
         var instance: Repo? = null
         lateinit var _context: Context
+
+        fun getApiHeaders(): Map<String, String> {
+            var map: HashMap<String, String> = HashMap()
+            map.put("X-RapidAPI-Host", "top-anime.p.rapidapi.com")
+            map.put("X-RapidAPI-Key", "25b765628bmsheab7d9b25f691f6p1dc81djsnefd51f015226")
+            return map
+        }
     }
 
     fun getInstance(context: Context):Repo {
@@ -38,7 +45,7 @@ class Repo {
                     .select("p").eq(0).toString()
                 val description = _description.subSequence(3, _description.length - 10)
                 val anime = Anime(image = image, title = name, address = address, rating = rating,
-                    description = description.toString())
+                    description = description.toString(), watched = false)
                 profilePic.postValue(anime)
             } catch (e: IOException){
                 e.printStackTrace()
